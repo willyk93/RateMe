@@ -13,18 +13,18 @@ const EditProfileUser = () => {
     console.log(_id)
 
     useEffect(() => {
-        fetch(`/api/get-user/${_id}`)
+        fetch(`/api/get-single/${_id}`)
         .then(res => res.json())
         .then(data => {setuserData(data.data)
         })
     }, [update])
     const handleSubmit = (e) => {
         e.preventDefault()
-        fetch(`/api/get-user/${_id}`, {
+        fetch(`/api/get-single/${_id}`, {
             method: 'PATCH',
             body: JSON.stringify({
             bio: bio,
-            id: _id,
+            _id: _id,
             name: name,
 
             }),
@@ -38,13 +38,13 @@ const EditProfileUser = () => {
             console.log(data)
         })
     }
+    console.log(userData)
     return (
         <div>
-            {userData && userData.map((element) => {
-                if (element._id === _id) {
-                    return <div>
-                        <p>{element.bio}</p>
-                        <p>{element.name}</p>
+            {userData &&
+                    <div>
+                        <p>{userData.bio}</p>
+                        <p>{userData.name}</p>
                         <form onSubmit={handleSubmit}>
                             <label>Update bio</label>
                             <input value={bio} onChange= {(e) => setBio(e.target.value)} type="text"/>
@@ -53,8 +53,7 @@ const EditProfileUser = () => {
                             <Button type="submit">submit</Button>
                         </form>
                     </div>
-                }
-            })}
+            }
             
     </div>
 

@@ -138,10 +138,10 @@ try{
 catch (error) {
     res.status(500).json({status: 500, error: error})
 
-}
+}}
 
 const getSingleUser = async (req, res) => {
-    const {_id} = req.params._id
+    const {_id} = req.params
     // const id = req.params.id
     
 
@@ -150,7 +150,8 @@ try{
     const db = client.db("RateMe");
     const data = await db.collection("users").findOne({_id:_id})
     
-    console.log(data)
+    console.log("single user" + data)
+    console.log(_id)
     res.status(200).json({status: 200, data: data})
 }
 catch (error) {
@@ -159,6 +160,7 @@ catch (error) {
 }
 
 }
+
 
 const updateSingleUser = async (req, res) => {
     
@@ -179,7 +181,8 @@ catch (error) {
 }
 
 }
-}
+
+
 module.exports = {
     addNewRating,
     getUserByEmail,

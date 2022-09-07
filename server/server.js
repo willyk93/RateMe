@@ -23,8 +23,8 @@ express()
 .post("/api/addRating/:email", addNewRating)
 .get("/api/get-painting/:profileId", getSinglePainting)
 .patch("/api/get-painting/:profileId", updateSinglePainting)
-.get("/api/get-user/:_id", getSingleUser)
-.patch("/api/get-user/:_id", updateSingleUser)
+.get("/api/get-single/:_id", getSingleUser)
+.patch("/api/get-single/:_id", updateSingleUser)
 
 
 
