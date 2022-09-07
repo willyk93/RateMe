@@ -1,15 +1,14 @@
-import GlobalStyles from './GlobalStyles';
 import { useState } from 'react';
 import styled from 'styled-components';
-import data from '../data';
+import { users } from './data';
 
 
 const Typeahead = ({ suggestions, handleSelect }) => {
         const [value, setValue] = useState('');
-        const filtered = suggestions.filter((book) => {
+        const filtered = suggestions.filter((Paintings) => {
             const moreTwoCharacters = value.length >= 2;
-            const matchingBook = book.title.toLowerCase().includes(value.toLowerCase());
-            return moreTwoCharacters && matchingBook;
+            const matchingPaintings = Paintings.description.toLowerCase().includes(value.toLowerCase());
+            return moreTwoCharacters && matchingPaintings;
         })
     
         return (
@@ -30,17 +29,17 @@ const Typeahead = ({ suggestions, handleSelect }) => {
             { filtered.length > 0 && 
             <ul>
                 {filtered.map((suggestion) => {
-                    const indexToSlice = suggestion.title.indexOf(value) + value.length;
-                    const firstHalf = suggestion.title.slice(0, indexToSlice +1);
-                    const secondHalf = suggestion.title.slice(indexToSlice +1);
+                    const indexToSlice = suggestion.description.indexOf(value) + value.length;
+                    const firstHalf = suggestion.description.slice(0, indexToSlice +1);
+                    const secondHalf = suggestion.description.slice(indexToSlice +1);
                     return (
                         <Suggestion 
                         key = {suggestion.id}
-                        onClick = {() => handleSelect(suggestion.title)}>
+                        onClick = {() => handleSelect(suggestion.description)}>
                             <span>
                                 {firstHalf}
                                 <Prediction>{secondHalf}</Prediction>
-                                <Category> in {suggestion.CategoryId}</Category>
+                                {/* <Category> in {suggestion.CategoryId}</Category> */}
                             </span>
                         </Suggestion>
                     )})
@@ -93,10 +92,10 @@ const Prediction = styled.span`
     font-weight: bold;
 `
 
-const Category = styled.span`
-    font-size: 15px;
-    font-style: italic;
-    color: #af519e;
-`
+// const Category = styled.span`
+//     font-size: 15px;
+//     font-style: italic;
+//     color: #af519e;
+// `
 
 

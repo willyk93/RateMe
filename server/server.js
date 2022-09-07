@@ -3,7 +3,12 @@ const express = require("express");
 const {
     addNewRating,
     getUserByEmail,
-    addPost
+    addPost,
+    getAllPaintings,
+    getSinglePainting,
+    updateSinglePainting,
+    getSingleUser,
+    updateSingleUser,
 } = require("./handlers");
 
 express()
@@ -13,8 +18,14 @@ express()
 
 
 .get("/api/get-user/:email", getUserByEmail)
-.get("/api/get-ratings", addNewRating)
+.get("/api/get-paintings", getAllPaintings)
 .post("/api/addpost/:email", addPost)
+.post("/api/addRating/:email", addNewRating)
+.get("/api/get-painting/:profileId", getSinglePainting)
+.patch("/api/get-painting/:profileId", updateSinglePainting)
+.get("/api/get-user/:_id", getSingleUser)
+.patch("/api/get-user/:_id", updateSingleUser)
+
 
 
 .listen(8000, () => {

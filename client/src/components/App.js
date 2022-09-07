@@ -5,8 +5,13 @@ import Profile from "./Profile";
 import styled from 'styled-components';
 import Navbar from "./Navbar";
 import Postpage from "./Postpage";
+import AboutUs from "./AboutUs";
+import EditProfile from "./EditProfile";
+import EditProfileUser from "./EditProfileUser"
+
 // import GlobalStyles from "./GlobalStyles";
 // import Typeahead from "./Typeahead";
+// import { users } from "./data";
 
 
 const App = () => {
@@ -21,14 +26,17 @@ const App = () => {
     <Routes>
       <Route exact path ='/'element={<HomeFeed/>}/>
       <Route exact path ='/postpage'element={<Postpage/>}/>
-      <Route exact path ='/:profile'element={<Profile/>}/>   
+      <Route exact path ='/:profile'element={<Profile/>}/>
+      <Route exact path ='/AboutUs'element={<AboutUs/>}/>
+      <Route exact path ='/profile/:profileId/:paintingId'element={<EditProfile/>}/>
+      <Route exact path ='/profile/:_id'element={<EditProfileUser/>}/>       
     </Routes>
 
     </BrowserRouter>
 
     {/* <GlobalStyles />
       <Typeahead
-      suggestions = {data.books}
+      suggestions = {users.Paintings}
       handleSelect = {(suggestion) => {
       window.alert(suggestion)
       }}
@@ -40,10 +48,11 @@ const App = () => {
 
 const Wrapper = styled.div`
 background-image: url("./background1.jpg");
-width: 100vw;
-height: 100vh;
+width: 100%;
+height: 100%;
 margin: 0;
 background-position: center;
+background-repeat: no-repeat;
 opacity: 1;
 
 `

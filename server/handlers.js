@@ -67,6 +67,7 @@ const addPost = async (req, res) => {
     console.log(data[0].Paintings)
     
     data[0].Paintings.push({paintSRC: null,
+                        paintName: req.body.status2,
                         description: req.body.status,
                         ratings: 0})
     console.log(data[0].Paintings)
@@ -79,8 +80,113 @@ const addPost = async (req, res) => {
 
 }
 
+const getAllPaintings = async (req, res) => {
+
+    await client.connect();
+    const db = client.db("RateMe");
+    const data = await db.collection("users").find().toArray()
+    
+    console.log(data.length)
+
+    let array2 = []
+for (let i = 0; i < data.length ; i++) {
+    for (let j = 0; j < data[i].Paintings.length ; j++) {
+        const obj = {email: data[i].email, name: data[i].name, paintSRC: data[i].Paintings[j].paintSRC, paintName: data[i].Paintings[j].paintName, description: data[i].Paintings[j].description}
+        array2.push(obj)
+        console.log(obj)
+    }
+
+}
+    console.log(array2)
+
+res.status(200).json({status: 200, data: array2})
+}
+
+const getSinglePainting = async (req, res) => {
+    const profileId = req.params.profileId
+    // const id = req.params.id
+    
+
+try{
+    await client.connect();
+    const db = client.db("RateMe");
+    const data = await db.collection("users").findOne({_id:profileId})
+    
+    console.log(data)
+    res.status(200).json({status: 200, data: data})
+}
+catch (error) {
+    res.status(500).json({status: 500, error: error})
+
+}
+
+}
+
+const updateSinglePainting = async (req, res) => {
+    const profileId = req.params.profileId
+    const {id,description,paintName} = req.body
+    
+
+try{
+    await client.connect();
+    const db = client.db("RateMe");
+    const data = await db.collection("users").updateOne({_id:profileId,"Paintings" :{ "$elemMatch": {_id: id} }},{"$set": {"Paintings.$.description": description, "Paintings.$.paintName": paintName}})
+    
+    console.log(data)
+    res.status(200).json({status: 200, data: data})
+}
+catch (error) {
+    res.status(500).json({status: 500, error: error})
+
+}
+
+const getSingleUser = async (req, res) => {
+    const {_id} = req.params._id
+    // const id = req.params.id
+    
+
+try{
+    await client.connect();
+    const db = client.db("RateMe");
+    const data = await db.collection("users").findOne({_id:_id})
+    
+    console.log(data)
+    res.status(200).json({status: 200, data: data})
+}
+catch (error) {
+    res.status(500).json({status: 500, error: error})
+
+}
+
+}
+
+const updateSingleUser = async (req, res) => {
+    
+    const {_id, bio, name} = req.body
+    
+
+try{
+    await client.connect();
+    const db = client.db("RateMe");
+    const data = await db.collection("users").updateOne({_id:_id,"data" :{ "$elemMatch": {_id: _id} }},{"$set": {"data.$.bio": bio, "data.$.name": name}})
+    
+    console.log(data)
+    res.status(200).json({status: 200, data: data})
+}
+catch (error) {
+    res.status(500).json({status: 500, error: error})
+
+}
+
+}
+}
 module.exports = {
     addNewRating,
     getUserByEmail,
-    addPost
+    addPost,
+    getAllPaintings,
+    getSinglePainting,
+    updateSinglePainting,
+    getSingleUser,
+    updateSingleUser,
 };

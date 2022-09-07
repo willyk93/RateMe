@@ -2,15 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 import {Button} from "@material-ui/core";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import {CurrentUserContext} from "./CurrentUserContext";
 
 
 
 const Postpage = () => {
 const { user, isAuthenticated, isLoading } = useAuth0();
 const [status, setStatus] = useState(null)
+const [status2, setStatus2] = useState(null)
+const {toggle, setToggle} = useContext(CurrentUserContext)
+console.log(toggle)
 const onChange = (e) => {
     setStatus(e.target.value)
+    console.log(status)
+}
+const onChange2 = (e) => {
+    setStatus2(e.target.value)
     console.log(status)
 }
 const onSubmit = (e) => {
@@ -19,7 +27,8 @@ const onSubmit = (e) => {
     fetch(`/api/addpost/${user.email}`, {
         method: 'POST',
         body: JSON.stringify({
-            status,
+            status: status,
+            status2: status2, 
         }),
         headers: {
             'Content-Type': 'application/json',
@@ -28,6 +37,8 @@ const onSubmit = (e) => {
             console.log("it's working")
             console.log(status)
             setStatus('')
+            setStatus2('')
+            setToggle(!toggle)
         });
     
 }
@@ -36,7 +47,8 @@ const onSubmit = (e) => {
     <Wrapper>
 <form onSubmit = {onSubmit}>
     <div>
-    <input value = {status} onChange = {onChange} placeholder="What's your inspiration" type= "text"></input>
+    <input required value = {status} onChange = {onChange} placeholder="What's your inspiration" type= "text"></input>
+    <input required value = {status2} onChange = {onChange2} placeholder="Give it a name" type= "text"></input>
     </div>
     <Button type = "submit">Post</Button>
 </form>
@@ -62,7 +74,10 @@ input {
     flex: 1;
     margin-left: 20px;
     font-size: 20px;
-    border: none;
+    border: 1;
+    border-radius: 25px;
+    height: 60px;
+    width: 400px;
 
 }
 `

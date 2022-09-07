@@ -6,6 +6,7 @@ export const CurrentUserContext = createContext();
 export const CurrentUserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = React.useState(null);
     const [status, setStatus] = useState('loading');
+    const [toggle, setToggle] = useState(false)
 
     // useEffect (() => {
     //     fetch('/api/me/profile')
@@ -22,7 +23,9 @@ export const CurrentUserProvider = ({ children }) => {
         value={{ 
             currentUser, 
             status,
-            setStatus 
+            setStatus,
+            toggle,
+            setToggle
             }}>
             {children}
         </CurrentUserContext.Provider>
