@@ -1,16 +1,8 @@
 const userRatings = [
-    // id: ""
-        {painting: "the chappelle",
-        ratings: [
-        { email: "willyk@gmail.com", 
-        rating: "5"},
-
-        { email: "willyk@gmail.com", 
-        rating: "5"},
-        
-        { email: "willyk@gmail.com", 
-        rating: "5"},
-        ]
-        
+        {id: "211",
+        rating: 4,
+        email: "personWhoRated@email.com"
         }
     ]
+    
+    module.exports = { userRatings }

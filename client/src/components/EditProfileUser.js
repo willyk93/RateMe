@@ -2,6 +2,8 @@ import React from "react";
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
 import { Button } from "@material-ui/core";
+import styled from "styled-components";
+
 
 const EditProfileUser = () => {
     const { _id } = useParams()
@@ -40,7 +42,7 @@ const EditProfileUser = () => {
     }
     console.log(userData)
     return (
-        <div>
+        <Wrapper>
             {userData &&
                     <div>
                         <p>{userData.bio}</p>
@@ -55,10 +57,24 @@ const EditProfileUser = () => {
                     </div>
             }
             
-    </div>
+    </Wrapper>
 
     )
 };
 
 
+const Wrapper = styled.div`
+
+Button {
+    width: 125px;
+    height: 40px;
+    margin: 25px 0 50px 0;
+    border-radius: 25px;
+    background-color: #1DA1F2;
+    margin-left: 20px;
+}
+`
+
+
 export default EditProfileUser;
+

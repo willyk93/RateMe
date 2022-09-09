@@ -50,13 +50,16 @@ useEffect(() => {
             />
             <PaintingGrid>
                 {filteredPainting.length && filteredPainting.map((element) => {
+                    console.log(element._id)
                 return (
                     <PaintingContainer> 
                         
                         <>
+                        <Link to={`/paint/${element.paintSRC}`}>
                         <Painting img={`${element.paintSRC}`}> 
-                            <p>{`${element.description}`}</p>
+                            <div><p>{`${element.description}`}</p></div>
                         </Painting>
+                        </Link>
 
                         <Link
                             to={`/${element.email}`}
@@ -65,7 +68,8 @@ useEffect(() => {
                         </Link>
 
                         <p>{`${element.paintName}`}</p>
-                        {isAuthenticated && user.email === element.email && <Ratings/>}
+                        {isAuthenticated && user.email !== element.email && <Ratings _id = {element._id}/>}
+                    
                         </>
                         
                     </PaintingContainer>
@@ -102,6 +106,9 @@ margin: 0 20px 20px 0;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+a {
+    text-decoration: none;
+}
 `
 
 const Painting = styled.div`
@@ -110,11 +117,20 @@ width: 300px;
 background-image: url(${props => props.img});
 background-size: cover;
 border: 1px solid black;
+
+div{
+    border: 1px red solid;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 p {
     display:none;
 }
-:hover {
-    filter: brightness(25%);
+div:hover {
+    background-color: rgba(0,0,0,0.5);
 
 }
 :hover p{

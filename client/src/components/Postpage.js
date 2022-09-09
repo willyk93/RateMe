@@ -12,7 +12,7 @@ const { user, isAuthenticated, isLoading } = useAuth0();
 const [status, setStatus] = useState(null)
 const [status2, setStatus2] = useState(null)
 const {toggle, setToggle} = useContext(CurrentUserContext)
-console.log(toggle)
+// console.log(toggle)
 const onChange = (e) => {
     setStatus(e.target.value)
     console.log(status)

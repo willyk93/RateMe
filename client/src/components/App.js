@@ -7,7 +7,8 @@ import Navbar from "./Navbar";
 import Postpage from "./Postpage";
 import AboutUs from "./AboutUs";
 import EditProfile from "./EditProfile";
-import EditProfileUser from "./EditProfileUser"
+import EditProfileUser from "./EditProfileUser";
+import paintsDetails from "./paintsDetails";
 
 // import GlobalStyles from "./GlobalStyles";
 // import Typeahead from "./Typeahead";
@@ -29,7 +30,8 @@ const App = () => {
       <Route exact path ='/:profile'element={<Profile/>}/>
       <Route exact path ='/AboutUs'element={<AboutUs/>}/>
       <Route exact path ='/profile/:profileId/:paintingId'element={<EditProfile/>}/>
-      <Route exact path ='/profile/:_id'element={<EditProfileUser/>}/>       
+      <Route exact path ='/profile/:_id'element={<EditProfileUser/>}/>     
+      <Route exact path ='/paint/:paintingId'element={<paintsDetails/>}/>  
     </Routes>
 
     </BrowserRouter>

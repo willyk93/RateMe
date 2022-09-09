@@ -22,10 +22,15 @@ const Profile = () => {
         {fetch(`/api/get-user/${profile}`)
         .then(res => res.json())
         .then(data => setuserData(data.data))}
+
+        //New fetch for a get request
+
     }, [toggle])
 
+
+
     // if (isAuthenticated) {
-    //     console.log(userData)
+        // console.log(userData)
     // }
     return (
     
@@ -48,7 +53,8 @@ const Profile = () => {
     </Header>
     <Postpage/> 
     
-    {userData.Paintings.map((element) => {
+    {userData.Paintings.map((element,index) => {
+    console.log(userData)
             return (
             <PaintingContainer> 
                         {element.paintSRC ? 
@@ -59,8 +65,9 @@ const Profile = () => {
                         </PaintingColumn>
 
                         <PaintingColumn>
-                            <text>{`${element.description}`}</text>
-                            <p><Ratings/></p>
+                            <h3>{`${element.description}`}</h3>
+                            {element.paintSRC && userData && <p>the Average rating is :<strong>{userData.rateArray[index][element._id]} </strong></p>}
+                            {/* <Ratings/> */}
                             <Link to = {`/profile/${userData._id}/${element._id}`}>
                             <Button>Edit</Button>
                             </Link>
@@ -79,8 +86,9 @@ const Profile = () => {
                         </PaintingColumn>
 
                         <PaintingColumn>
-                            <text>{`${element.description}`}</text>
-                            <Ratings/>
+                            <h3>{`${element.description}`}</h3>
+                            <p>Average rating: <strong>{userData.rateArray[index]}</strong></p>
+                            {/* <Ratings/> */}
                             <Link to = {`/profile/${userData._id}/${element._id}`}>
                             <Button>Edit</Button>
                             </Link>

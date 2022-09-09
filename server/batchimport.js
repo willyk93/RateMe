@@ -2,6 +2,7 @@
 const { MongoClient } = require("mongodb");
 require("dotenv").config();
 const { users } = require("./data");
+const { userRatings } = require("./dataRating");
 
 const { MONGO_URI } = process.env;
 const options = {
@@ -16,7 +17,8 @@ const options = {
         try{
             const db = client.db("RateMe");
         await client.connect();
-        await db.collection('users').insertMany(users)
+        await db.collection('userRatings').insertMany(userRatings)
+        // await db.collection('users').insertMany(users)
 
             // })
 
